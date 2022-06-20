@@ -1,24 +1,15 @@
-# music
+# 版权声明
 
-## Project setup
-```
-npm install
-```
+本项目所有图片和文字版权归属 [米哈游科技（上海）有限公司_](https://baike.baidu.com/item/米哈游科技（上海）有限公司/20526858) 所有
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 开发进度
 
-### Compiles and minifies for production
-```
-npm run build
-```
+登录界面开发75%
 
-### Lints and fixes files
-```
-npm run lint
-```
+![image-20220620151407422](README.assets/image-20220620151407422.png)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![image-20220620151425256](README.assets/image-20220620151425256.png)
+
+登录界面--视频(待优化)
+
+![image-20220620151520710](README.assets/image-20220620151520710.png)
