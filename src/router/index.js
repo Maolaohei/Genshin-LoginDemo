@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import IndexView from '../views/IndexView.vue'
 import LoginView from '../views/LoginView.vue'
+import GameView from '../views/GameView.vue'
+import NewsView from  '../views/NewsView.vue'
 const routes = [
 {
   path: '/',
   name: 'Index',
-  component: IndexView,
+  component:  IndexView,
 },{
   path: '/index',
 
@@ -14,6 +16,16 @@ const routes = [
   path: '/login',
 name: 'Login',
   component: LoginView,
+},
+{
+  path: '/game',
+name: 'game',
+  component: GameView,
+},
+{
+  path: '/news',
+name: 'news',
+  component: NewsView,
 }
 ]
 

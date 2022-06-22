@@ -1,117 +1,60 @@
 <template>
-  <div class="index">
-    <div class="nav">
-      <ul>
-        <li>原神</li>
-        <li><span>2.8.0</span></li>
-        <li class="img">
-          <img
-            src="https://s1.328888.xyz/2022/06/19/017xO.png"
-            alt="017xO.png"
-            border="0"
-          />
-        </li>
-        <li class="img"></li>
-        <li class="img">
-          <img
-            src="https://s1.328888.xyz/2022/06/19/01R4q.png"
-            alt="01R4q.png"
-            border="0"
-          />
-        </li>
-        <li class="img">
-          <img
-            src="https://s1.328888.xyz/2022/06/19/0nVpg.png"
-            alt="0nVpg.png"
-            border="0"
-          />
-        </li>
-      </ul>
+  <div
+    class="login"
+    :style="{ backgroundImage: 'url(' + image + ') !important' }"
+  >
+    <div class="logo">
+      <img
+        src="https://user.mihoyo.com/t_1654682718376/src/resources/images/miHoYo_Logo_451cbfd2.png"
+        class="mihoyo-logo"
+      />
     </div>
-    <div class="content">
-      <div class="content-bg">
-        <img
-          src="https://s1.328888.xyz/2022/06/20/0jruR.png"
-          alt="0jruR.png"
-          border="0"
-        />
-        <img
-          src="https://uploadstatic.mihoyo.com/puzzle/upload/puzzle/2022/05/25/fb6c8486704de2da0a1ce9a9f926a162_7587870463396353322.png?x-oss-process=image/format,webp"
-          class="pz-image pz-wrapper pz-z6BtGCedQ2-enter-to"
-          haspzwrapper="true"
-          uniid="pz-z6BtGCedQ2"
-          id="pz_OSQYUgTjUbpz-z6BtGCedQ2"
-          data-v-47219032=""
-          style="
-            position: absolute;
-            width: 13.01rem;
-            height: 13.63rem;
-            left: 6.73039rem;
-            top: 2.2rem;
-            cursor: pointer;
-            font-size: 86.0185px;
-          "
-        />
 
-        <!-- 轮播图 -->
-        <div class="container0lb">
-          <ul>
-            <li>
-              <img
-                src="https://upload-bbs.mihoyo.com/upload/2022/06/17/050f5184f8c1859b622026b3073bc73a.png"
-              />
-            </li>
-            <li>
-              <img
-                src="https://upload-bbs.mihoyo.com/upload/2022/06/17/f3656028a06f58c07c84ef34917e604e.jpeg"
-              />
-            </li>
-            <li>
-              <img
-                src="https://upload-bbs.mihoyo.com/upload/2022/06/17/37869f2f51f7e2c5882c2d73ff5e3dc8.jpeg"
-              />
-            </li>
-          </ul>
-          <ol>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ol>
-        </div>
-
-        <div class="start"><router-link to="/login">开始游戏</router-link></div>
+    <div class="login-contion">
+      <form>
+        <ul>
+          <li :class="action == 0 ? 'action' : ''" @click="showTab(0)">
+            验证码登录
+          </li>
+          <li :class="action == 1 ? 'action' : ''" @click="showTab(1)">
+            密码登录
+          </li>
+        </ul>
+        <table>
+          <tr>
+            <td>
+              <div class="border-bt">
+                <input type="text" :placeholder="input1" v-model="number" />
+              </div>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="border-ph">
+                <input type="text" :placeholder="input2" v-model="pass" />
+              </div>
+            </td>
+            <td>
+              <span @click="scode" v-if="showcode">获取验证码</span
+              ><span v-if="!showcode">{{ code }}</span>
+            </td>
+          </tr>
+        </table>
+        <span style="color: red" v-show="logintext">登陆失败</span>
+        <div class="login-btn" @click="login">登录</div>
+      </form>
+      <div class="issue">遇到问题?</div>
+      <div class="enroll">立即注册</div>
+      <div class="msg">
+        未注册的手机验证后将自动登录。注册/登录即代表您同意并遵守
+        <span>《米哈游通行证用户服务协议》</span>
+        <span>《米哈游通行证用户个人信息及隐私保护政策》</span>
       </div>
-      <!-- 公告栏 -->
-      <div class="notice">
-        <div class="nav" >
-          <ul>
-            <li :class="active==0?'select':''"  @click="selct(0)">活动</li>
-            <li :class="active==1?'select':''" @click="selct(1)">公告</li>
-            <li :class="active==2?'select':''" @click="selct(2)">资讯</li>
-          </ul>
-       
-        </div>
-           <div class="notice-contion" v-show="o">
-            <ul>
-              <li>「烦恼刈除」· 久岐忍登场 参与活动赢周边~ <span>06/17</span></li>
-              <li>【有奖活动】「花坂豪快」荒泷一斗表情征集活动开启！<span>06/15</span></li>
-            </ul>
-          </div>
-          <div class="notice-contion" v-show="t">
-            <ul>
-              <li>「深泥奇谭」活动：矿道清理挑战<span>06/20</span></li>
-              <li>2.7版本游戏问题集中反馈-6月17日更新<span>05/31</span></li>
-            </ul>
-          </div>
-          <div class="notice-contion" v-show="s">
-            <ul>
-              <li>《原神》EP - 花坂豪情之志 <span>06/20</span></li>
-              <li>让你们听听天下第一的歌声！<span>06/20</span></li>
-            </ul>
-          </div>
-      </div>
-      <!-- 侧边栏 -->
-      <div class="Sidebar"></div>
+    </div>
+    <div class="MN">
+      <div class="nm">人物:{{ this.name }}</div>
+      <div class="nm" @click="changeBg">随机切换主题</div>
     </div>
   </div>
 </template>
@@ -120,241 +63,270 @@
 export default {
   data() {
     return {
-      active: 0,
-      o:true,
-      t:false,
-      s:false
+      video: require("../assets/login.mp4"),
+      action: 0,
+      input1: "手机号码注册/登录",
+      input2: "手机验证码",
+      number: "",
+      pass: "",
+      image: "",
+      name: "",
+      code: "dasdasda21321///asd/assdasdas13212312ewdqwdqw",
+      showcode: true,
+      logintext: false,
+      bg: [],
     };
-  },methods: {
-    selct(index) {
-      this.active = index;
-    if(index==0){
-      this.o=true;
-      this.t=false;
-      this.s=false;
-    }else if(index==1){
-      this.o=false;
-      this.t=true;
-      this.s=false;
-      
-    }else if(index==2){
-      this.o=false;
-      this.t=false;
-      this.s=true;
-    }
-    }
-  }
+  },
+  methods: {
+    // tab切换
+    showTab(index) {
+      this.action = index;
+      if (index == 0) {
+        this.input1 = "手机号码注册/登录";
+        this.input2 = "手机验证码";
+        this.showcode = true;
+      } else {
+        this.input1 = "手机号/邮箱";
+        this.input2 = "密码";
+        this.showcode = false;
+        this.code = "";
+      }
+    },
+    //    登录方法
+    login() {
+      if (this.pass == this.code) {
+        this.logintext = false;
+        this.$router.push({ name: "Login", params: { number: this.number } });
+      } else {
+        console.log(this.pass, this.code);
+        this.logintext = true;
+        //刷新验证码
+          this.scode()
+      }
+    },
+    //    获取验证码
+    scode() {
+      this.code = Math.floor(Math.random() * 1000000);
+      console.log(this.code);
+      this.showcode = false;
+    },
+    //切换主题
+    changeBg() {
+      var api = "fengge.json";
+      this.axios.get(api).then((res) => {
+        console.log(res.data);
+        this.bg = res.data;
+        var sdq = Math.ceil(Math.random() * 4);
+        var dq = "";
+        var Act = "";
+        if (sdq == 1) {
+          dq = "mengde";
+          Act = Math.ceil(Math.random() * 19);
+        } else if (sdq == 2) {
+          dq = "liyue";
+          Act = Math.ceil(Math.random() * 17);
+        } else if (sdq == 3) {
+          dq = "daoqi1";
+          Act = Math.ceil(Math.random() * 13);
+        } else {
+          dq = "daoqi1";
+          Act = Math.ceil(Math.random() * 13);
+        }
+        console.log(dq);
+
+        console.log(Act);
+
+        console.log("开始赋值");
+        if (dq == "mengde") {
+          console.log("mengde");
+          this.name = this.bg.mengde[Act].name;
+          this.image = this.bg.mengde[Act].src;
+          console.log(this.name);
+        } else if (dq == "liyue") {
+          console.log("liyue", this.bg.liyue[0][Act]);
+          this.name = this.bg.liyue[0][Act].name;
+          this.image = this.bg.liyue[0][Act].src;
+          console.log(this.name);
+        } else {
+          console.log("daoqi");
+
+          this.name = this.bg.daoqi[Act].name;
+          this.image = this.bg.daoqi[Act].src;
+          console.log(this.name);
+        }
+      });
+    },
+  },
+  created() {
+    this.changeBg();
+  },
+  mounted() {},
 };
 </script>
 
-<style scoped>
-.index {
-  display: flex;
-  height: 58rem;
-
-  /* 垂直排序 */
-  flex-direction: column;
-}
-.nav {
-  flex: 1;
-
-  background: #141414;
-}
-.nav ul li {
-  margin-top: 0.2rem;
-  display: inline-block;
-}
-.nav ul li {
-  margin-left: 0.5rem;
-  color: white;
-}
-.nav ul li span {
-  color: #3e3e3e;
-}
-.nav ul li img {
-  height: 1.3rem;
-}
-.nav ul .img {
-  float: right;
-}
-.content {
-  flex: 29;
-
-  overflow: hidden;
-  display: flex;
-}
-.content-bg {
-  flex: 1;
-}
-.content-bg img {
-  position: relative;
-  z-index: -1;
+<style SCOPED>
+video {
   width: 100%;
-  height: 100%;
+  height: 57rem;
 }
-/* 侧边栏 */
-.Sidebar {
+/* 隐藏控件 */
+video::-webkit-media-controls {
+  display: none !important;
+}
+.login {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 58.09rem;
+  flex-direction: column;
+  background: #eaeaea;
+  background-image: url(https://uploadstatic.mihoyo.com/contentweb/20200103/2020010311083818450.png);
+}
+.logo {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.logo img {
+  height: 5rem;
+  margin: 3rem 0 3rem 0rem;
+}
+/* 表单 */
+.login-contion {
+  margin: 0 auto;
+  text-align: center;
+  height: 41rem;
+  width: 40rem;
+
+  background: rgba(255, 255, 255, 0.75);
+}
+.login-contion form ul li {
+  display: inline-block;
+  margin: 3rem 2rem;
+  font-size: 1.5rem;
+  padding: 0 1.5rem 1rem 1.5rem;
+}
+.login-contion form ul li:hover {
+  cursor: pointer;
+}
+.action {
+  border-bottom: 0.35rem solid #4ea4dc;
+  color: #4ea4dc;
+}
+.login-contion form table {
+  margin: 0 auto;
+  font-size: 1.3rem;
+}
+table tr {
+  height: 6rem;
+}
+.border-bt {
+  padding-bottom: 0.5rem;
+}
+.border-bt:hover {
+  border-bottom: 1px solid #4ea4dc;
+}
+table tr td span {
+  color: #54a5dc;
+}
+
+table tr td span:hover {
+  cursor: pointer;
+}
+.login-contion form input {
+  border: none;
+  background: rgba(255, 255, 255, 0);
+  outline: 0;
+  font-size: 1.3rem;
+}
+.border-ph,
+.border-ph:link,
+.border-ph:visited,
+.border-ph:focus {
+  text-decoration: none;
+}
+/*设置a的定位，给我们自己编写的下划线一个定位参考*/
+.border-ph {
+  position: relative;
+}
+/*使用伪类给a下面添加下划线*/
+/*css3为了区别伪类选择器把::改为:,使用:也会自动转为::*/
+.border-ph::after {
+  content: "";
+  display: block;
+  /*开始时候下划线的宽度为0*/
+  width: 0;
+  height: 1px;
   position: absolute;
-  z-index: 1;
-  background: black;
-  right: 0rem;
-  width: 6rem;
-  height: 96%;
-  opacity: 0.3;
+  left: 0;
+  bottom: -10px;
+  background: #4ea4dc;
+  /*这里我们设定所有改变都有动画效果，可以自己指定样式才有动画效果*/
+  transition: all 0.3s ease-in-out;
 }
-/* 开始按钮 */
-.start {
+.border-ph:hover::after {
+  width: 100%;
+}
+
+.login-btn {
+  width: 50%;
+  margin: 3rem auto;
+
   padding: 1rem 3rem 1rem 3rem;
-  position: absolute;
-  bottom: 3.2rem;
-  left: 92.2rem;
-  color: #704a18;
-  font-size: 2rem;
-  background: #ffca0a;
+  background: #4ea4dc;
   border-radius: 0.5rem;
   border: 1px solid #ccc;
+  color: #ffffff;
+  font-size: 1.5rem;
 }
-.start:hover{
+.login-btn:hover {
   cursor: pointer;
 }
-/* 轮播图 */
-.container0lb {
-  position: absolute;
-  z-index: 2;
-  top: 15rem;
-  left: 4rem;
-}
-
-.container0lb ul li {
-  list-style: none;
-  float: left;
-}
-.container0lb ul img {
-  width: 35rem;
-  height: 14rem;
-}
-.container0lb {
-  width: 35rem;
-  height: 14rem;
-  margin: 50px auto 0;
-  overflow: hidden;
-  /* position: relative; */
-  /* z-index: 99; */
-  border: 1px solid black;
-}
-.container0lb ol {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  padding: 10px;
-  margin-left: -50px;
-  z-index: 999;
-opacity: 0;
-}
- .container0lb ol:hover {
-
-opacity: 1;
-}
-.container0lb ol li {
-  width: 1rem;
-  height: 1rem;
-  background-color: #fff;
-  border: 2px solid #ccc;
-  border-radius: 50%;
-  margin: 0px 2px;
+.issue,
+.enroll {
   display: inline-block;
+  margin-top: 0rem;
+  font-size: 1.2rem;
+  margin: 0rem 7rem 0rem 7rem;
+  color: #4ea4dc;
 }
-/* 动画样式 */
-.container0lb ul {
-  animation: Yui 6s cubic-bezier(0, 1, 0, 1) 0s infinite;
-  width: 400%;
-}
-@keyframes Yui {
-  0% {
-    transform: translateX(0px);
-  }
-  33% {
-    transform: translateX(-35rem);
-  }
-  66% {
-    transform: translateX(-70rem);
-  }
-  100% {
-    transform: translateX(0px);
-  }
-}
-.container0lb ol li {
-  animation: focus 6s linear infinite;
-}
-.container0lb ol li:nth-child(1) {
-  animation-delay: 0s;
-}
-.container0lb ol li:nth-child(2) {
-  animation-delay: 2s;
-}
-.container0lb ol li:nth-child(3) {
-  animation-delay: 4s;
-}
-
-@keyframes focus {
-  0% {
-    background-color: #000;
-  }
-  20% {
-    background-color: #000;
-  }
-  30% {
-    background-color: #fff;
-  }
-}
-/* 公告栏 */
-.notice {
-  position: absolute;
-  top: 35rem;
-  left: 4rem;
-  width: 35rem;
-  height: auto;
-
-
-
-}
-.notice .nav {
-  width: 35rem;
-  background: rgba(0,0,0,0.6); 
-}
-.notice .nav ul li {
-  padding:0.5rem 1rem 0.5rem 1rem;
-  font-size: 1rem;
-  color: white;
-  
-}
-.notice .nav ul li:hover {
- color: #ffd284;
+.issue:hover,
+.enroll:hover {
   cursor: pointer;
 }
-.select {
-  color: #ffd284 !important;
-  border-bottom: 1px solid #ffd284;
-}
-.notice-contion{
-  padding: 1.2rem 0rem 0rem 2rem;
-background: rgba(0,0,0,0.35); 
+.msg {
+  margin: 0 auto;
+  text-align: center;
+  width: 68%;
+  margin-top: 1.5rem;
 
-    height: 8rem;
-    color: white;
-    font-size: 1rem;
+  font-size: 0.9rem;
 }
-.notice-contion ul li {
-  margin-top: 0.5rem;
+.msg span {
+  color: #4ea4dc;
 }
-.notice-contion ul li:hover{
-  color: #ffd284;
-cursor:pointer;
+.msg span:hover {
+  cursor: pointer;
+}
+.MN {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  justify-items: center;
+}
 
-}
-.notice-contion ul li span{
-  float: right;
-  margin-right: 1rem;
+.nm {
+  padding: 1rem 1.1rem 1rem 1rem;
 
+  margin-left: 1rem;
+  margin-top: 1rem;
+  color: black;
+  background: rgba(78, 164, 220, 0.75);
+  border-radius: 2rem;
+  width: 6%;
+  text-align: center;
+}
+.nm:hover {
+  cursor: pointer;
 }
 </style>
