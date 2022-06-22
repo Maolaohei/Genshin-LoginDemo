@@ -25,3 +25,11 @@
 ![image-20220621001954531](README.assets/image-20220621001954531.png)
 
 ![image-20220621002006720](README.assets/image-20220621002006720.png)
+
+## 登录后首页
+
+![首页](README.assets/%E9%A6%96%E9%A1%B5.png)
+
+## 轮播图
+
+![轮播图](README.assets/%E8%BD%AE%E6%92%AD%E5%9B%BE.png)
