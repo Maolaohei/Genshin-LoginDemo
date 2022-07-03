@@ -1,4 +1,4 @@
-#正在使用Vite+Vue-TS+VUEX重构
+# 正在使用Vite+Vue-TS+VUEX重构
 # 版权声明
 
 本项目所有图片和文字版权归属 [米哈游科技（上海）有限公司_](https://baike.baidu.com/item/米哈游科技（上海）有限公司/20526858) 所有
